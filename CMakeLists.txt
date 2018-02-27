@@ -9,18 +9,32 @@ set(CMAKE_CXX_FLAGS "${CXX_FLAGS}")
 
 set(sources src/PID.cpp src/main.cpp)
 
-include_directories(/usr/local/include)
-link_directories(/usr/local/lib)
 
 if(${CMAKE_SYSTEM_NAME} MATCHES "Darwin") 
 
+include_directories(/usr/local/include)
 include_directories(/usr/local/opt/openssl/include)
+link_directories(/usr/local/lib)
 link_directories(/usr/local/opt/openssl/lib)
 link_directories(/usr/local/Cellar/libuv/1*/lib)
 
 endif(${CMAKE_SYSTEM_NAME} MATCHES "Darwin") 
 
+if (WIN32)
+    set(VCPKG_INSTALL ${_VCPKG_INSTALLED_DIR}/${VCPKG_TARGET_TRIPLET})
+    message("Using vcpkg_install ${VCPKG_INSTALL}")
+    message("Using Windows Target Platform Version: ${CMAKE_VS_WINDOWS_TARGET_PLATFORM_VERSION}")
+    include_directories(${VCPKG_INSTALL}/include)
+    link_directories(${VCPKG_INSTALL}/lib)
+endif()
 
 add_executable(pid ${sources})
 
-target_link_libraries(pid z ssl uv uWS)
+if (NOT WIN32)
+    target_link_libraries(pid z ssl uv uWS)
+else()
+    target_link_libraries(pid ssleay32 libuv uWS ws2_32)
+    target_link_libraries(pid optimized zlib )
+    target_link_libraries(pid debug zlibd )
+endif()
+
