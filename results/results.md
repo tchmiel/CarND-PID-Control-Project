@@ -10,11 +10,11 @@
 In this project, I successfully implemented a PID Controller in C++ to manever the vehicle around the Term 2 simulator track.
 
 ---
-To tune the Steering PID Controller, I manual tuning it by varying one parameter each run.  I mainly followed the steps indentified in the Forums - https://discussions.udacity.com/t/car-veering-off/312738/11
+To tune the Steering PID Controller, I manual tuned it by varying one parameter each run.  I mainly followed the steps indentified in the Forums - https://discussions.udacity.com/t/car-veering-off/312738/11
 
-1.  Set Ki, Kd to zero.  Find a Kp value that works.
-2.  With Kp fixed, change Kd, slowly increasing Kd.
-3.  Tune both Kp and Kd, so no oscillations.
+1.  Set Ki, Kd to zero, and find a Kp value that works.
+2.  With Kp fixed, change Kd and slowly increasing Kd.
+3.  Tune both Kp and Kd, to minimize oscillations.
 4.  Tune Ki
 5.  Once the steering controller is tuned, add in a second pid to control the throttle.
 
@@ -22,9 +22,9 @@ To tune the Steering PID Controller, I manual tuning it by varying one parameter
 
 Here are the steps I took to manually tune this controller:
 
-### Steering Pid
+### Steering PID
 
-|  Kp | Ki   | Kd  | Throttle_value  |Comments| Status |
+|  Kp | Ki   | Kd  | Throttle  |Comments| Status |
 |---|---|---|---|---|---|
 | 1.00| 0.00  | 0  |  30 |   | | Unsuccessful |
 | -0.50 | 0.00  | -0.50   | 30  | Starting point from Project Review video  | Unsuccessful
@@ -42,7 +42,7 @@ Here are the steps I took to manually tune this controller:
 |  -0.15 | 0.00003  | -5.00  | 60  | not much difference | Successful|
 |  -0.15 | 0.00003  | -5.00  | 30  | Successful at 30 as well | Successful|
 
-I settled on the following parameters for my steering pid controller:
+I settled on the following parameters for my steering PID controller:
 
     Kp = -0.15
     Ki = 0.0003
@@ -55,22 +55,8 @@ P controller as well.
     Ki =  0.00
     Kd =  0.00
 
-After implementing both controller, I was able to successfully control the vehicle for at least 3 laps with a target speed up to 65 mph.  Here is a video showing the
-final results, averaging roughlty 59 mph.
+After implementing both controllers, the vehicle navigated the course correctly at least 3 laps with a target speed up to 65 mph.  Here is a video showing the final results, with a constant speed of 59 mph.
 
 ---
 
-<object width="425" height="350">
-  <param name="movie" value="https://www.youtube.com/watch?v=Dy2lb78cYIA" />
-  <param name="wmode" value="transparent" />
-  <embed src="https://www.youtube.com/watch?v=Dy2lb78cYIA"
-         type="application/x-shockwave-flash"
-         wmode="transparent" width="425" height="350" />
-</object>
-
-----
-
-
-
-
-
+[![PID Controller](./pidcontroller.png)](https://www.youtube.com/watch?v=Dy2lb78cYIA")
