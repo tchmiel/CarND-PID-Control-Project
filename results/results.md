@@ -59,4 +59,4 @@ After implementing both controllers, the vehicle navigated the course correctly 
 
 ---
 
-[![PID Controller](./pidcontroller.png)](https://www.youtube.com/watch?v=Dy2lb78cYIA")
+[![PID Controller](PIDController.png)](https://www.youtube.com/watch?v=Dy2lb78cYIA")
